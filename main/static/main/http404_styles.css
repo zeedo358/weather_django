@@ -1,0 +1,21 @@
+body{
+    font-family: sans-serif;
+}
+h1{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+h2{
+    font-size: 50px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0px;
+    margin-top: 90px;
+}

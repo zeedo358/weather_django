@@ -1,0 +1,229 @@
+{% extends 'main/layout.html'%}
+{% load static %}
+
+
+{% block head %}
+    <link href="{% static 'main/get_weather_styles.css' %}" rel="stylesheet">
+    <script>
+
+        function set_default(){
+
+            button = document.querySelector('button[data-day="0"]')
+            button.disabled = true
+            const day = button.parentElement.parentElement.querySelector('.card-header');
+
+            document.querySelector('#header_date').innerHTML = dates_for_header[0];
+            document.querySelector('#chosed_day').innerHTML = day.innerHTML;
+            document.querySelector('#chosed_day_kind').innerHTML = data[0].kind_of_weather;
+            document.querySelector('#chosed_day_avg_t').innerHTML = "Температура: " + data[0].avg_temp + "°C";
+            document.querySelector('#chosed_day_avg_f').innerHTML = "Ймовірність опадів: " + data[0].avg_fallings + "%";
+
+            temperature_elements = document.querySelectorAll('.temp')
+            fallings_elements = document.querySelectorAll('.fall')
+
+            for(let i = 0; i < data[0].temp.length;i++){
+                temperature_elements[i].innerHTML = data[0].temp[i] + "°C"
+                fallings_elements[i].innerHTML = data[0].fallings[i] + "%"
+            }
+
+            let new_image = data[0].kind_of_weather
+            document.getElementById('image').src = `../static/main/images/${new_image}.png`.replace(' ','_')
+
+        }
+
+
+        let data = JSON.parse("{{JSONDATA|escapejs}}")
+        let days = JSON.parse("{{days|escapejs}}")
+        let dates_for_header = JSON.parse("{{dates_for_header|escapejs}}")
+
+
+        document.addEventListener("DOMContentLoaded",function(){
+
+            let j = 0
+            let i = "{{current_date.weekday}}"
+            let card_headers = document.querySelectorAll('.card-header')
+
+            while (j != 6){
+
+                if(i >= 7){
+                    card_headers[j].innerHTML = days[i - 7]
+                }
+                else{
+                    card_headers[j].innerHTML = days[i]
+                }
+                j++
+                i++
+            }
+
+
+            set_default()
+
+
+            document.querySelectorAll('button').forEach(button => {
+                button.onclick = () => {
+
+                    document.querySelectorAll('button').forEach(button => {button.disabled = false})
+                    button.disabled = true;
+                    const cur_day = button.dataset.day
+                    const day = button.parentNode.parentNode.querySelector('.card-header');
+
+                    document.querySelector('#header_date').innerHTML = dates_for_header[cur_day];
+                    document.querySelector('#chosed_day').innerHTML = day.innerHTML;
+                    document.querySelector('#chosed_day_kind').innerHTML = data[cur_day].kind_of_weather;
+                    document.querySelector('#chosed_day_avg_t').innerHTML = "Температура: " + data[cur_day].avg_temp + "°C";
+                    document.querySelector('#chosed_day_avg_f').innerHTML = "Ймовірність опадів: " + data[cur_day].avg_fallings + "%";
+
+                    temperature_elements = document.querySelectorAll('.temp')
+                    fallings_elements = document.querySelectorAll('.fall')
+
+                    for(let i = 0; i < data[cur_day].temp.length;i++){
+                        temperature_elements[i].innerHTML = data[cur_day].temp[i] + "°C"
+                        fallings_elements[i].innerHTML = data[cur_day].fallings[i] + "%"
+                    }
+
+                    let new_image = data[cur_day].kind_of_weather
+                    document.getElementById('image').src = `../static/main/images/${new_image}.png`.replace(' ','_')
+                }
+            })
+        })
+
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="div">
+        <div id="header">
+            <h1 id = "header_date">{{current_date.day}} {{month}}</h1>
+            <h1>{{town}}</h1>
+        </div>
+        <form class = "fm" action="{% url 'get_weather' None %}" method="POST">
+            {% csrf_token %}
+            <input class = 'fm-text' type = 'text' placeholder="Місто" name="town">
+            <input class = "fm-submit" type = "submit" value="">
+        </form>
+    </div>
+
+    <div>
+        <h1 id="today">{{day}}</h1>
+    </div>
+
+
+    <div class="today">
+        <div style="display: inline-block;">
+            <h2 id = 'chosed_day'>Day</h2>
+            <h2 id = 'chosed_day_kind'>Тип погоди</h2>
+            <h2 id = 'chosed_day_avg_t'>Середня температура</h2>
+            <h2 id = 'chosed_day_avg_f'>Процент опадів</h2>
+        </div>
+        <div style="display: inline-block; margin-left: 100px;">
+            <img id = 'image' src="" width="200px" height="200px">
+        </div>
+    </div>
+
+
+    <table id="t1">
+        <caption class="t1">Детальніша інформація</caption>
+        <tr>
+            <th>Дані</th>
+            <th>Ніч</th>
+            <th>Ранок</th>
+            <th>День</th>
+            <th>Вечір</th>
+        </tr>
+        <tr>
+            <td>Температура</td>
+            <td class = 'temp'></td>
+            <td class = 'temp'></td>
+            <td class = 'temp'></td>
+            <td class = 'temp'></td>
+        </tr>
+        <tr>
+            <td>Ймовірність опадів</td>
+            <td class = 'fall'></td>
+            <td class = 'fall'></td>
+            <td class = 'fall'></td>
+            <td class = 'fall'></td>
+        </tr>
+    </table>
+
+    <div class="cards">
+        <div>
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{info.0.kind_of_weather}}</h5>
+                    <h5 class="card-title">{{info.0.avg_temp}} °C</h5>
+                    <h5 class="card-title">{{info.0.avg_fallings}} %</h5>
+                    <button data-day="0" class = 'card-button'>Переглянути</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{info.1.kind_of_weather}}</h5>
+                    <h5 class="card-title">{{info.1.avg_temp}} °C</h5>
+                    <h5 class="card-title">{{info.1.avg_fallings}} %</h5>
+                    <button data-day="1" class = 'card-button'>Переглянути</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{info.2.kind_of_weather}}</h5>
+                    <h5 class="card-title">{{info.2.avg_temp}} °C</h5>
+                    <h5 class="card-title">{{info.2.avg_fallings}} %</h5>
+                    <button data-day="2" class = 'card-button'>Переглянути</button>
+                </div>
+            
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{info.3.kind_of_weather}}</h5>
+                    <h5 class="card-title">{{info.3.avg_temp}} °C</h5>
+                    <h5 class="card-title">{{info.3.avg_fallings}} %</h5>
+                    <button data-day="3" class = 'card-button'>Переглянути</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{info.4.kind_of_weather}}</h5>
+                    <h5 class="card-title">{{info.4.avg_temp}} °C</h5>
+                    <h5 class="card-title">{{info.4.avg_fallings}} %</h5>
+                    <button data-day="4" class = 'card-button'>Переглянути</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{info.5.kind_of_weather}}</h5>
+                    <h5 class="card-title">{{info.5.avg_temp}} °C</h5>
+                    <h5 class="card-title">{{info.5.avg_fallings}} %</h5>
+                    <button data-day="5" class = 'card-button'>Переглянути</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

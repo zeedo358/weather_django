@@ -1,0 +1,20 @@
+{% extends 'main/layout.html'%}
+{% load static %}
+
+
+{% block head %}
+    <link href="{% static 'main/index_styles.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="sun"></div>
+    <div class = 'container'>
+        <div class = 'cloud'>
+        </div>
+    </div>
+    <h1>Weather</h1>
+    <form class = "fm" action="{% url 'get_weather' None %}" method="POST">
+        {% csrf_token %}
+        <input type = 'text' placeholder="Місто" name="town">
+        <input class = "fm-submit" type = "submit" value="Пошук">
+    </form>
+{% endblock %}
