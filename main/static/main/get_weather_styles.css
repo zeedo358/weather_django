@@ -188,6 +188,7 @@ button:hover{
     transform: translate(50%, -70%);
   }
 }
+
 @media (max-width:1024px) {
   h1{
     font-size: 24px;
@@ -486,6 +487,7 @@ button:hover{
     transform: translate(-50%,0%);
   }
 }
+
 @media (max-width:320px) {
   h1{
     font-size: 22px;
@@ -579,6 +581,276 @@ button:hover{
   img{
     width: 100px;
     height: 100px;
+    margin-left: 0px;
+    left: 40%;
+    transform: translate(-50%,0%);
+  }
+}
+@media (min-width:1025px) and (max-width:1279px)  {
+  .fm{
+    left: 49%;
+  }
+  .today{
+    top:33%;
+    left:0%
+  }
+  #t1{
+    top: 65%;
+  }
+  img{
+    left: 30%;
+    transform: translate(-40%,0%);
+  }
+  .cards{
+    left:67%;
+  }
+}
+
+@media (max-height:1024px) and (min-width:768px) and (max-width:996px)  {
+  .fm{
+    left: 59%;
+  }
+  #t1{
+    left:10%;
+  }
+}
+@media (max-height:1024px) and (min-width:480px) and (max-width:768px)  {
+  .fm{
+    left: 35%;
+  }
+  #t1{
+    top:48%;
+    left:22%;
+  }
+  .today {
+    font-size: 14px;
+    text-align: left;
+    top: 26%;
+    left: 36%;
+    transform: translate(-60%, -60%);
+  }
+  img{
+    top:40%;
+    left: 100%;
+    transform: translate(0%,-50%);
+  }
+  .cards{
+    left:10%;
+    top:88%;
+    grid-template-columns: repeat(3, 130px);
+  }
+}
+@media (max-height:1024px) and (min-width:320px) and (max-width:480px)  {
+  .fm{
+    left: 35%;
+  }
+  #t1{
+    top:49%;
+  }
+  .today {
+    font-size: 14px;
+    text-align: left;
+    top: 30%;
+    left: 36%;
+    transform: translate(-60%, -60%);
+  }
+  img{
+    top:40%;
+    left: 100%;
+    transform: translate(0%,-50%);
+  }
+  .cards{
+    left:10%;
+  }
+}
+@media (max-height:768px) and (min-width:420px) and (max-width:768px)  {
+  
+  #t1{
+    top:49%;
+  }
+  .today {
+    font-size: 14px;
+    text-align: left;
+    top: 30%;
+    left: 36%;
+    transform: translate(-60%, -60%);
+  }
+  img{
+    top:40%;
+    left: 100%;
+    transform: translate(-30%,-50%);
+  }
+}
+@media (max-height:768px) and (min-width:320px) and (max-width:480px)  {
+  
+  #t1{
+    top:49%;
+  }
+  .today {
+    font-size: 12px;
+    text-align: left;
+    top: 30%;
+    left: 36%;
+    transform: translate(-60%, -60%);
+  }
+  img{
+    top:40%;
+    left: 100%;
+    transform: translate(0%,-50%);
+  }
+}
+
+
+@media (max-height:480px) {
+  .cards{
+    position: absolute;
+    top: 58%;
+    left: 65%;
+    transform: translate(0%, -50%);
+    grid-template-columns: repeat(2, 80px);
+    grid-template-rows: repeat(3, 100px);
+  }
+  
+  .card{
+    width: 70px;
+    height: 90px;
+    margin-bottom: 5px;
+  }
+  .card-button{
+    font-size: 5px;
+    margin-top: 2px;
+    width: 45px;
+    height: 15px;
+  }
+  .card-title{
+    margin-bottom: 3px;
+  }
+  .card-header{
+    font-size: 12px;
+    margin: 5px;
+  }
+  .card-body{
+    font-size: 10px;
+  }
+  .t1 {
+    margin: 5px auto;
+    border: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  #t1 {
+    text-align: center;
+    font-size: 11px;
+    position: absolute;
+    top: 75%;
+    left: 14%;
+    transform: translate(-15%, -63%);
+    border: 2px solid black;
+    border-collapse: collapse;
+  }
+  
+  th {
+    margin: 3px auto;
+    padding: 5px;
+    border: 2px solid black;
+  }
+  
+  td {
+    margin: 3px auto;
+    padding: 5px;
+    border: 2px solid black;
+  }
+
+  .today {
+    font-size: 9px;
+    text-align: left;
+    top: 35%;
+    left: 35%;
+    transform: translate(-60%, -60%);
+  }
+  img{
+    width: 80px;
+    height: 80px;
+    margin-left: 0px;
+    left: 40%;
+    transform: translate(-50%,0%);
+  }
+}
+
+@media (max-height:320px) {
+  .cards{
+    position: absolute;
+    top: 70%;
+    left: 67%;
+    transform: translate(0%, -50%);
+    grid-template-columns: repeat(2, 48px);
+    grid-template-rows: repeat(3, 80px);
+  }
+  
+  .card{
+    width: 40px;
+    height: 70px;
+    margin-bottom: 5px;
+  }
+  .card-button{
+    font-size: 3px;
+    margin-top: 3px;
+    width: 30px;
+    height: 13px;
+  }
+  .card-title{
+    margin-bottom: 3px;
+  }
+  .card-header{
+    font-size: 7px;
+    margin: 7px;
+  }
+  .card-body{
+    font-size: 6px;
+  }
+  .t1 {
+    margin: 3px auto;
+    border: 10px;
+    padding: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  #t1 {
+    text-align: center;
+    font-size: 7px;
+    position: absolute;
+    top: 88%;
+    left: 11%;
+    transform: translate(-15%, -63%);
+    border: 2px solid black;
+    border-collapse: collapse;
+  }
+  
+  th {
+    margin: 2px auto;
+    padding: 5px;
+    border: 2px solid black;
+  }
+  
+  td {
+    margin: 2px auto;
+    padding: 5px;
+    border: 2px solid black;
+  }
+
+  .today {
+    font-size: 6px;
+    text-align: left;
+    top: 46%;
+    left: 34%;
+    transform: translate(-60%, -60%);
+  }
+  img{
+    width: 50px;
+    height: 50px;
     margin-left: 0px;
     left: 40%;
     transform: translate(-50%,0%);
