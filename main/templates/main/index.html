@@ -4,6 +4,7 @@
 
 {% block head %}
     <link href="{% static 'main/index_styles.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0">
 {% endblock %}
 {% block body %}
     <div class="sun"></div>
@@ -14,7 +15,7 @@
     <h1>Weather</h1>
     <form class = "fm" action="{% url 'get_weather' None %}" method="POST">
         {% csrf_token %}
-        <input type = 'text' placeholder="Місто" name="town">
+        <input class = "fm-input" type = 'text' placeholder="Місто" name="town">
         <input class = "fm-submit" type = "submit" value="Пошук">
     </form>
 {% endblock %}

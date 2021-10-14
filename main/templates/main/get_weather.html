@@ -4,6 +4,7 @@
 
 {% block head %}
     <link href="{% static 'main/get_weather_styles.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0">
     <script>
 
         function set_default(){
@@ -95,12 +96,12 @@
         <div id="header">
             <h1 id = "header_date">{{current_date.day}} {{month}}</h1>
             <h1>{{town}}</h1>
+            <form class = "fm" action="{% url 'get_weather' None %}" method="POST">
+                {% csrf_token %}
+                <input class = 'fm-text' type = 'text' placeholder="Місто" name="town">
+                <input class = "fm-submit" type = "submit" value="">
+            </form>
         </div>
-        <form class = "fm" action="{% url 'get_weather' None %}" method="POST">
-            {% csrf_token %}
-            <input class = 'fm-text' type = 'text' placeholder="Місто" name="town">
-            <input class = "fm-submit" type = "submit" value="">
-        </form>
     </div>
 
     <div>
@@ -147,83 +148,78 @@
     </table>
 
     <div class="cards">
-        <div>
-            <div class="card">
-                <div class="card-header">
+        <div class="card">
+            <div class="card-header">
 
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{info.0.kind_of_weather}}</h5>
-                    <h5 class="card-title">{{info.0.avg_temp}} °C</h5>
-                    <h5 class="card-title">{{info.0.avg_fallings}} %</h5>
-                    <button data-day="0" class = 'card-button'>Переглянути</button>
-                </div>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{info.1.kind_of_weather}}</h5>
-                    <h5 class="card-title">{{info.1.avg_temp}} °C</h5>
-                    <h5 class="card-title">{{info.1.avg_fallings}} %</h5>
-                    <button data-day="1" class = 'card-button'>Переглянути</button>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="card">
-                <div class="card-header">
-
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{info.2.kind_of_weather}}</h5>
-                    <h5 class="card-title">{{info.2.avg_temp}} °C</h5>
-                    <h5 class="card-title">{{info.2.avg_fallings}} %</h5>
-                    <button data-day="2" class = 'card-button'>Переглянути</button>
-                </div>
-            
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{info.3.kind_of_weather}}</h5>
-                    <h5 class="card-title">{{info.3.avg_temp}} °C</h5>
-                    <h5 class="card-title">{{info.3.avg_fallings}} %</h5>
-                    <button data-day="3" class = 'card-button'>Переглянути</button>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div class="card">
-                <div class="card-header">
-
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{info.4.kind_of_weather}}</h5>
-                    <h5 class="card-title">{{info.4.avg_temp}} °C</h5>
-                    <h5 class="card-title">{{info.4.avg_fallings}} %</h5>
-                    <button data-day="4" class = 'card-button'>Переглянути</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{info.5.kind_of_weather}}</h5>
-                    <h5 class="card-title">{{info.5.avg_temp}} °C</h5>
-                    <h5 class="card-title">{{info.5.avg_fallings}} %</h5>
-                    <button data-day="5" class = 'card-button'>Переглянути</button>
-                </div>
+            <div class="card-body">
+                <span class="card-title">{{info.0.kind_of_weather}}</span>
+                <span class="card-title">{{info.0.avg_temp}} °C</span>
+                <span class="card-title">{{info.0.avg_fallings}} %</span>
+                <button data-day="0" class = 'card-button'>Переглянути</button>
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-header">
 
+            </div>
+            <div class="card-body">
+                <span class="card-title">{{info.1.kind_of_weather}}</span>
+                <span class="card-title">{{info.1.avg_temp}} °C</span>
+                <span class="card-title">{{info.1.avg_fallings}} %</span>
+                <button data-day="1" class = 'card-button'>Переглянути</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <span class="card-title">{{info.2.kind_of_weather}}</span>
+                <span class="card-title">{{info.2.avg_temp}} °C</span>
+                <span class="card-title">{{info.2.avg_fallings}} %</span>
+                <button data-day="2" class = 'card-button'>Переглянути</button>
+            </div>
+        
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <span class="card-title">{{info.3.kind_of_weather}}</span>
+                <span class="card-title">{{info.3.avg_temp}} °C</span>
+                <span class="card-title">{{info.3.avg_fallings}} %</span>
+                <button data-day="3" class = 'card-button'>Переглянути</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <span class="card-title">{{info.4.kind_of_weather}}</span>
+                <span class="card-title">{{info.4.avg_temp}} °C</span>
+                <span class="card-title">{{info.4.avg_fallings}} %</span>
+                <button data-day="4" class = 'card-button'>Переглянути</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <span class="card-title">{{info.5.kind_of_weather}}</span>
+                <span class="card-title">{{info.5.avg_temp}} °C</span>
+                <span class="card-title">{{info.5.avg_fallings}} %</span>
+                <button data-day="5" class = 'card-button'>Переглянути</button>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

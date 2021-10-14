@@ -12,6 +12,7 @@ def main(request):
     return render(request,'main/index.html')
 
 def get_weather(request,town):
+    town = town.lower()
     today_date = date.today()
     if request.method == 'POST':
         town = request.POST['town']
@@ -27,3 +28,4 @@ def get_weather(request,town):
     'days':dumps([day.capitalize() for day in DAYS]),
     'month':MONTHS[today_date.month - 1],
     'JSONDATA':dumps(info)})
+

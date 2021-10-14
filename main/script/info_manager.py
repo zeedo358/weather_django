@@ -62,8 +62,10 @@ class Manager:
 		elif  50 < managed_information['avg_fallings'] and managed_information['avg_temp'] > 0:
 			managed_information['kind_of_weather'] = 'Зливи'
 		elif  2.5 < managed_information['avg_fallings'] <= 8:
-			managed_information['kind_of_weather'] = 'Мінлива хмарність'
-		elif managed_information['avg_fallings'] <= 2.5:
+			managed_information['kind_of_weather'] = 'Похмуро'
+		elif 0.5 <= managed_information['avg_fallings'] <= 2.5:
+			managed_information['kind_of_weather'] = 'Хмарно'
+		elif managed_information['avg_fallings'] < 0.5:
 			managed_information['kind_of_weather'] = 'Ясно'
 
 		return managed_information
@@ -94,5 +96,6 @@ def execute(city,date):
 			data[request.place] = {date:[time.time(),result_of_request]}
 		_save_data(data)
 	return data[city][date][1]
+
 
 
