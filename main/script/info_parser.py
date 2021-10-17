@@ -43,7 +43,7 @@ class Parser:
 			else:
 				break
 		else:
-			raise HTTPTooManyRequests
+			return
 
 		return BeautifulSoup(result,'html.parser')
 
@@ -62,12 +62,13 @@ class Parser:
 		information = {'kind_of_weather':'','avg_temp':0,'avg_fallings':0,'temp':[None,None,None,None],'fallings':[None,None,None,None]}
 		#get fallings
 		soup = await self._get_soup(self.urls['google'])
-		items = soup.find_all('div',class_ = 'XwOqJe')
+		try:
+			items = soup.find_all('div',class_ = 'XwOqJe')
+		except AttributeError:
+			return None
 		fallings = []
-
 		if not items:
 			return None
-
 		for i,elem in enumerate(items):
 			# taking 24 hours for day we need
 			if i < (24 - datetime.datetime.now().hour) + ((self.date.date_ - self.date.date_.today()).days * 24) and i >= (23 - datetime.datetime.now().hour) + (((self.date.date_ - self.date.date_.today()).days -1) * 24): # 24 hours
@@ -107,6 +108,8 @@ class Parser:
 
 		soup = await self._get_soup(self.urls['meteotrend'])
 		blocks = soup.find_all('div',class_ = 'box')
+		if not blocks:
+			return None
 
 		for block in blocks:
 			name = block.find('h5').text
@@ -189,6 +192,8 @@ class Parser:
 		#getting all information for the day
 		soup = await self._get_soup(self.urls['sinoptik'])
 		items = soup.find_all('tr',class_ = None)[2].findAll('td')
+		if not items:
+			return None
 		fallings = [item.text for item in items]
 		items = soup.find('tr',class_ = 'temperature').findAll('td')
 		temperature = [item.text for item in items]

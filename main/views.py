@@ -28,4 +28,3 @@ def get_weather(request,town):
     'days':dumps([day.capitalize() for day in DAYS]),
     'month':MONTHS[today_date.month - 1],
     'JSONDATA':dumps(info)})
-

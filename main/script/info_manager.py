@@ -98,4 +98,3 @@ def execute(city,date):
 	return data[city][date][1]
 
 
-
